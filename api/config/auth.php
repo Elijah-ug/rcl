@@ -40,6 +40,26 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        "api"=>[
+            "driver"=>"token",
+            "provider"=>'users'
+        ],
+        "admin"=>[
+            "driver"=>"token",
+            "provider"=>"admins"
+        ],
+        "admin-api"=>[
+            "driver"=>"token",
+            "provider"=>"admins"
+        ],
+        "player"=>[
+            "driver"=>"token",
+            "provider"=>"admins"
+        ],
+        "player-api"=>[
+            "driver"=>"token",
+            "provider"=>"admins"
+        ]
     ],
 
     /*
@@ -62,9 +82,16 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', App\Models\User::class),
+            'model' => env('USER_AUTH_MODEL', App\Models\User::class),
         ],
-
+        "admins"=>[
+            "driver"=>"eloquent",
+            "model"=>env("ADMIN_AUTH_MODEL", App\Models\Admin::class)
+        ],
+        "players"=>[
+            "driver"=>"eloquent",
+            "model"=>env("PLAYER_AUTH_MODEL", App\Models\Player::class)
+        ]
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
@@ -97,6 +124,12 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+        "admins"=>[
+            "provider"=>"admins",
+            "table"=>env("AUTH_PASSWORD_RESET_TOKEN_TABLE", "password_reset_tokens"),
+            "expire"=>60,
+            "throttle"=>60
+        ]
     ],
 
     /*
