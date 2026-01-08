@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 class Admin extends Authenticatable{
     //
-    use HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable;
     // mass asignable attributes
     protected $fillable=["name", "email", "password"];
     // hidden attributes for serialization
@@ -20,9 +21,9 @@ class Admin extends Authenticatable{
         return $this->hasMany(News::class);
     }
 
-    // attributes that should be cast
-    public function cast(){
-        return ["email_verified_at"=>"datetime", "password"=>"hashed"];
-    }
+    // attribute casting
+    
+        protected $casts = ["email_verified_at"=>"datetime", "password"=>"hashed"];
+    
 
 }

@@ -36,6 +36,14 @@ return [
     */
 
     'guards' => [
+         "admin"=>[
+            "driver"=>"sanctum",
+            "provider"=>"admins"
+        ],
+        "admin-api"=>[
+            "driver"=>"sanctum",
+            "provider"=>"admins"
+        ],
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
@@ -44,14 +52,7 @@ return [
             "driver"=>"token",
             "provider"=>'users'
         ],
-        "admin"=>[
-            "driver"=>"token",
-            "provider"=>"admins"
-        ],
-        "admin-api"=>[
-            "driver"=>"token",
-            "provider"=>"admins"
-        ],
+       
         "player"=>[
             "driver"=>"token",
             "provider"=>"admins"
