@@ -6,22 +6,19 @@ use App\Http\Requests\LoginAdminRequest;
 use App\Http\Requests\StoreAdminRequest;
 use App\Http\Requests\UpdateAdminRequest;
 use App\Models\Admin;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller{
-    /**
-     * Display a listing of the resource.
-     */
+    use SoftDeletes;
+    protected $dates = ["deleted_at"];
     public function index(){
         $admins = Admin::all();
         return response()->json(["message"=>"Admins fetched", "data"=>$admins], 200);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreAdminRequest $request) {
         // add admin
        $admin =  Admin::create($request->validated());
@@ -53,9 +50,7 @@ class AdminController extends Controller{
             "data"=>$admin
         ]);
     }
-    /**
-     * Display the specified resource.
-     */
+
     public function show(Admin $admin) {
         // $admin = Admin::where("id", $id);
         $currentAdmin = auth("admin")->user();
@@ -66,9 +61,6 @@ class AdminController extends Controller{
         
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdateAdminRequest $request, Admin $admin){
         //validate data
         $data = $request->validated();
@@ -76,15 +68,16 @@ class AdminController extends Controller{
         $admin->update($data);
         return response()->json([
             "message"=>"Updated admin",
-            "data"=>$data
+            "data"=>$admin
         ], 200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Admin $admin) {
+        $currentAdmin = auth("admin")->user();
+        if($currentAdmin->getKey() !== $admin->getKey()){
+            return response()->json(["message"=>"Unauthorized"], 403);
+        }
         $admin->delete();
-        return response()->json(["message"=>"admin deleted!"]);
+        return response()->json(["message"=>"admin deleted!", "data"=>$admin], 200);
     }
 }

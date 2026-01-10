@@ -1,0 +1,45 @@
+import type React from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardAction, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Link } from "react-router-dom";
+
+export const Login: React.FC = () => {
+  return (
+    <div className="flex justify-center ">
+      <Card className="w-full max-w-sm">
+        <CardHeader>
+          <CardTitle>Login to your account</CardTitle>
+          <CardAction>
+            <Link to="/signup" className="underline-offset-4 hover:underline">
+              Sign up
+            </Link>
+          </CardAction>
+        </CardHeader>
+        <CardContent>
+          <form>
+            <div className="flex flex-col gap-6">
+              <div className="grid gap-2">
+                <Label htmlFor="email">Email</Label>
+                <Input id="email" type="email" placeholder="m@example.com" required className="border-gray-400" />
+              </div>
+              <div className="grid gap-2">
+                <div className="flex items-center">
+                  <Label htmlFor="password">Password</Label>
+                  <Link to="#" className="ml-auto inline-block text-sm underline-offset-4 hover:underline">
+                    Forgot your password?
+                  </Link>
+                </div>
+                <Input id="password" type="password" required className="border-gray-400" />
+              </div>
+              <Button type="submit" className="bg-blue-500 hover:bg-blue-400">
+                Login
+              </Button>
+            </div>
+          </form>
+        </CardContent>
+      </Card>
+    </div>
+  );
+};

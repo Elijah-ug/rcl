@@ -12,7 +12,6 @@ use Laravel\Sanctum\HasApiTokens;
 class Admin extends Authenticatable{
     //
     use HasApiTokens, HasFactory, Notifiable;
-    // mass asignable attributes
     protected $fillable=["name", "email", "password"];
     // hidden attributes for serialization
     protected $hidden=["password", "remember_token"];
@@ -22,7 +21,6 @@ class Admin extends Authenticatable{
     }
 
     // attribute casting
-    
         protected $casts = ["email_verified_at"=>"datetime", "password"=>"hashed"];
     
 

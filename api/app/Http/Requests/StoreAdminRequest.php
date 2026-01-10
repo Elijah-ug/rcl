@@ -11,7 +11,7 @@ class StoreAdminRequest extends FormRequest{
         return [
              "name"=>"required|string|max:70",
              "email"=>"required|email|unique:admins",
-             "password"=>"required|string|min:6"
+             "password"=>"required|string|min:6|confirmed"
             ];
     }
 }
