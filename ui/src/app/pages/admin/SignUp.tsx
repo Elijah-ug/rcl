@@ -5,14 +5,19 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "react-toastify";
+import { useAddAdminMutation } from "@/app/state/features/auth/adminAuthQuery";
+import { useNavigate } from "react-router-dom";
 
 export const SignUp: React.FC = () => {
+  const [newAdmin, { isLoading }] = useAddAdminMutation();
+
   const [credentials, setCredentials] = useState<object | any>({
     name: "",
     email: "",
     password: "",
     password_confirmation: "",
   });
+  const navigate = useNavigate();
 
   const handleAddAdmin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -20,7 +25,12 @@ export const SignUp: React.FC = () => {
       if (credentials?.password !== credentials.password_confirmation) {
         return toast.error("Password doesn't match");
       }
-      console.log("Credentials==>", credentials);
+      const res = await newAdmin(credentials);
+      // console.log("Admin==>", res?.data?.token);
+      const token: string = res?.data?.token as string;
+      toast.success(res?.data?.message) as string;
+      localStorage.setItem("token", token);
+      return navigate("/admin-dashboard");
     } catch (error) {
       console.log("Error=>", error);
       return toast.error("Admin Signup failed");

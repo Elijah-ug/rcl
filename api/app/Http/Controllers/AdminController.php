@@ -51,14 +51,9 @@ class AdminController extends Controller{
         ]);
     }
 
-    public function show(Admin $admin) {
-        // $admin = Admin::where("id", $id);
-        $currentAdmin = auth("admin")->user();
-        if($currentAdmin->getKey() !== $admin->getKey()){
-            return response()->json(["message"=>"Unauthorized"], 403);
-        }
+    public function show() {
+        $admin = auth("admin")->user();
         return response()->json(["message"=>"Admin fetched", "data"=>$admin]);
-        
     }
 
     public function update(UpdateAdminRequest $request, Admin $admin){

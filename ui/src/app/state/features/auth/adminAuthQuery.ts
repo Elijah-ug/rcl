@@ -1,11 +1,20 @@
-import type { Admin } from "@/types/types";
+import type { AdminAuthRequest, AdminUpdate, GetAdmin } from "@/types/types";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const adminAuthQuery = createApi({
   reducerPath: "adminAuth",
-  baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_ADMIN_BASE_URL }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: import.meta.env.VITE_ADMIN_BASE_URL,
+    prepareHeaders: (headers) => {
+      const token = localStorage.getItem("token");
+      if (token) {
+        headers.set("authorization", `Bearer ${token}`);
+      }
+      return headers;
+    },
+  }),
   tagTypes: ["Admin"],
   endpoints: (builder) => ({
-    getAllAdmins: builder.query<Admin, void>({
+    getAllAdmins: builder.query<GetAdmin, void>({
       query: () => ({
         url: "/",
         method: "GET",
@@ -13,32 +22,32 @@ export const adminAuthQuery = createApi({
       providesTags: ["Admin"],
     }),
 
-    getAdmin: builder.query<Admin, void>({
-      query: (admin) => ({
-        url: `/${admin}`,
+    getAdmin: builder.query<GetAdmin, void>({
+      query: () => ({
+        url: "/me",
         method: "GET",
       }),
       providesTags: ["Admin"],
     }),
 
-    addAdmin: builder.mutation<Admin, Partial<Admin>>({
+    addAdmin: builder.mutation<AdminAuthRequest, any>({
       query: (body) => ({
-        url: "/",
+        url: "/registration",
         method: "POST",
-        body
+        body,
       }),
       invalidatesTags: ["Admin"],
     }),
 
-    updateAdmin: builder.mutation<Admin, Partial<Admin> & Pick<Admin, "id"> >({
-      query: ({id, ...patch}) => ({
+    updateAdmin: builder.mutation<AdminAuthRequest, AdminUpdate>({
+      query: ({ id, ...patch }) => ({
         url: `/${id}`,
         method: "PATCH",
-        patch
+        body: patch,
       }),
       invalidatesTags: ["Admin"],
     }),
   }),
 });
 
-export const { useGetAllAdminsQuery, useGetAdminQuery, useAddAdminMutation } = adminAuthQuery;
+export const { useGetAllAdminsQuery, useGetAdminQuery, useAddAdminMutation, useUpdateAdminMutation } = adminAuthQuery;

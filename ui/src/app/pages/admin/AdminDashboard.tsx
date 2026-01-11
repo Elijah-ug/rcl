@@ -1,12 +1,13 @@
-import { useGetAllAdminsQuery } from "@/app/state/features/auth/adminAuthQuery";
 import React from "react";
+import { SideNavBar } from "./SideNavBar";
 
 export const AdminDashboard: React.FC = () => {
-  const { data, isLoading } = useGetAllAdminsQuery();
-  console.log("data=>", isLoading ? isLoading : data?.data);
   return (
     <div>
-      <div className="">Admin Dashboard</div>
+      <div className="">
+        <SideNavBar />
+        {/* <Profile /> */}
+      </div>
     </div>
   );
 };
