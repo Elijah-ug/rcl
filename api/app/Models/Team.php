@@ -4,10 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Team extends Model
-{
+class Team extends Model{
     //
-    protected $fillable=["name", "coach"];
+    protected $fillable=["name", "coach", "captain"];
     public function players(){
         return $this->hasMany(Player::class);
     }

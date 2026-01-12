@@ -11,6 +11,11 @@ import { Dinner } from "./app/pages/dinner/Dinner";
 import { Footer } from "./app/components/Footer";
 import { Authenticated } from "./app/pages/admin/Authenticated";
 import { SignUp } from "./app/pages/admin/SignUp";
+import { Profile } from "./app/pages/admin/Profile";
+import { AddTeam } from "./app/pages/admin/AddTeam";
+import { AddPlayer } from "./app/pages/admin/AddPlayer";
+import { UpdateMatchResults } from "./app/pages/admin/UpdateMatchResults";
+import { CreateMatches } from "./app/pages/admin/CreateMatches";
 export const App: React.FC = () => {
   return (
     <div className="flex flex-col min-h-screen bg-gray-200">
@@ -20,7 +25,13 @@ export const App: React.FC = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="about" element={<About />} />
-            <Route path="admin-dashboard" element={<Authenticated />} />
+            <Route path="admin-dashboard" element={<Authenticated />}>
+              <Route path="profile" element={<Profile />} />
+              <Route path="add-team" element={<AddTeam />} />
+              <Route path="register-players" element={<AddPlayer />} />
+              <Route path="update-match-results" element={<UpdateMatchResults />} />
+              <Route path="create-matches" element={<CreateMatches />} />
+            </Route>
             <Route path="table-standings" element={<TableStandings />} />
             <Route path="dinner" element={<Dinner />} />
             <Route path="gallery" element={<Gallery />} />

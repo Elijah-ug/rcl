@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AddMatchRequest;
+use App\Models\Event;
 use Illuminate\Http\Request;
 
 class MatchController extends Controller
@@ -17,9 +19,9 @@ class MatchController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(AddMatchRequest $request){
+        $match= Event::create($request->validated());
+        return response()->json(["message"=>"Match added", "data"=>$match], 201);
     }
 
     /**

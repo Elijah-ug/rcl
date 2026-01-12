@@ -13,7 +13,7 @@ export const SideNavBar: React.FC = () => {
     { label: "Add Team", to: "add-team", icon: Users },
     { label: "Matches", to: "create-matches", icon: Calendar },
     { label: "Register Player", to: "register-players", icon: UserPlus },
-    { label: "Match Results", to: "update-match-results", icon: Trophy },
+    { label: "Update Match Results", to: "update-match-results", icon: Trophy },
   ];
 
   const NavContent = ({ onClick }: { onClick?: () => void }) => (
@@ -26,7 +26,7 @@ export const SideNavBar: React.FC = () => {
           className={({ isActive }) =>
             clsx(
               "flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition",
-              isActive ? "bg-primary text-primary-foreground" : "hover:bg-muted"
+              isActive ? "bg-amber-400 text-primary-foreground" : "hover:bg-muted"
             )
           }
         >
@@ -43,7 +43,9 @@ export const SideNavBar: React.FC = () => {
       <aside className="hidden md:block w-64 border-r">
         <Card className="h-screen rounded-none border-none">
           <CardHeader>
-            <CardTitle>Admin Control Panel</CardTitle>
+            <CardTitle>
+              <h3 className="px-2">Admin Dashboard</h3>
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <NavContent />
@@ -55,13 +57,15 @@ export const SideNavBar: React.FC = () => {
       <div className="md:hidden">
         <Sheet>
           <SheetTrigger asChild>
-            <Button variant="outline" size="icon">
-              <Menu />
-            </Button>
+            <div className="p-3">
+              <Button variant="outline" size="icon">
+                <Menu />
+              </Button>
+            </div>
           </SheetTrigger>
 
           <SheetContent side="left" className="w-64">
-            <h2 className="mb-4 text-lg font-bold">Admin Control Panel</h2>
+            <h2 className="mb-4 text-lg font-bold">Admin Dashboard</h2>
             <NavContent />
           </SheetContent>
         </Sheet>

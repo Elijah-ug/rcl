@@ -8,17 +8,25 @@ export type Admin = {
 };
 
 export type GetAdmin = {
-  massage: string;
   data: Admin;
+  message: string;
 };
 export type AdminAuthRequest = {
   message: string;
   data: Admin;
   token: string;
+  token_type: string;
 };
 export type AdminUpdate = {
   name: string;
   email: string;
   password: string;
   id: number;
+};
+
+// team
+export type AddTeam = {
+  name: string;
+  coach: string;
+  captain: string;
 };

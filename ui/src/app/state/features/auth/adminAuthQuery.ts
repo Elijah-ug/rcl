@@ -7,7 +7,7 @@ export const adminAuthQuery = createApi({
     prepareHeaders: (headers) => {
       const token = localStorage.getItem("token");
       if (token) {
-        headers.set("authorization", `Bearer ${token}`);
+        headers.set("authorization", token);
       }
       return headers;
     },
@@ -39,6 +39,15 @@ export const adminAuthQuery = createApi({
       invalidatesTags: ["Admin"],
     }),
 
+    loginAdmin: builder.mutation<AdminAuthRequest, any>({
+      query: (body) => ({
+        url: "/login",
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["Admin"],
+    }),
+
     updateAdmin: builder.mutation<AdminAuthRequest, AdminUpdate>({
       query: ({ id, ...patch }) => ({
         url: `/${id}`,
@@ -50,4 +59,10 @@ export const adminAuthQuery = createApi({
   }),
 });
 
-export const { useGetAllAdminsQuery, useGetAdminQuery, useAddAdminMutation, useUpdateAdminMutation } = adminAuthQuery;
+export const {
+  useGetAllAdminsQuery,
+  useGetAdminQuery,
+  useAddAdminMutation,
+  useUpdateAdminMutation,
+  useLoginAdminMutation,
+} = adminAuthQuery;

@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { toast } from "react-toastify";
 import { useAddAdminMutation } from "@/app/state/features/auth/adminAuthQuery";
 import { useNavigate } from "react-router-dom";
+import { LoadingSpinner } from "./LoadingSpinner";
 
 export const SignUp: React.FC = () => {
   const [newAdmin, { isLoading }] = useAddAdminMutation();
@@ -27,9 +28,9 @@ export const SignUp: React.FC = () => {
       }
       const res = await newAdmin(credentials);
       // console.log("Admin==>", res?.data?.token);
-      const token: string = res?.data?.token as string;
+      const headers = res?.data?.token_type + " " + res?.data?.token;
+      localStorage.setItem("token", headers);
       toast.success(res?.data?.message) as string;
-      localStorage.setItem("token", token);
       return navigate("/admin-dashboard");
     } catch (error) {
       console.log("Error=>", error);
@@ -92,7 +93,7 @@ export const SignUp: React.FC = () => {
               </div>
 
               <Button type="submit" className="bg-blue-500 hover:bg-blue-400">
-                Sign Up
+                {isLoading ? <LoadingSpinner /> : "Sign Up"}
               </Button>
             </div>
           </form>

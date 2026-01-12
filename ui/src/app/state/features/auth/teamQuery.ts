@@ -1,0 +1,42 @@
+import type { AddTeam } from "@/types/types";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+
+export const teamQuery = createApi({
+  reducerPath: "teams",
+  baseQuery: fetchBaseQuery({
+    baseUrl: import.meta.env.VITE_TEAMS_BASE_URL,
+    prepareHeaders: (headers) => {
+      const token = localStorage.getItem("token");
+      if (token) {
+        headers.set("authorization", token);
+      }
+      return headers;
+    },
+  }),
+  tagTypes: ["Teams"],
+  endpoints: (builder) => ({
+    getAllTeams: builder.query<any, void>({
+      query: () => ({
+        url: "",
+        method: "GET",
+      }),
+      providesTags: ["Teams"],
+    }),
+    getTeam: builder.query<any, void>({
+      query: (news) => ({
+        url: `/${news}`,
+        method: "GET",
+      }),
+      providesTags: ["Teams"],
+    }),
+
+    registerTeam: builder.mutation<AddTeam, any>({
+      query: (body) => ({
+        url: "/registration",
+        method: "POST",
+        body,
+      }),
+    }),
+  }),
+});
+export const { useGetAllTeamsQuery, useGetTeamQuery, useRegisterTeamMutation } = teamQuery;

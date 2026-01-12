@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Event extends Model
 {
     //
-        protected $fillable=["host", "visitor", "venue", "date", "time"];
-        public function teams(){
-            return $this->belongsToMany(Team::class);
+        protected $fillable=["host_team_id", "visitor_team_id", "venue", "date", "time"];
+        public function host(){
+            return $this->belongsTo(Team::class);
         }
-        public function result(){
+        public function visitor(){
             return $this->belongsTo(Result::class);
         }
 
