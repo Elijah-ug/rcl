@@ -23,21 +23,17 @@ export const TableStandings: React.FC = () => {
   ];
 
   return (
-    <section className="py-16 px-6 sm:px-10 lg:px-13 bg-gray-100">
-      <div className="">
+    <section className="py-16 px-6 sm:px-10 lg:px-13 bg-gray-100 sm:flex sm:items-center justify-center">
+      <div className="sm:w-2xl">
         {/* Header */}
-        <div className="flex items-center justify-between mb-6">
-          <h3 className="text-2xl font-bold text-gray-900">League Table</h3>
-          <Link to="/table-standings" className="text-sm font-medium text-amber-600 hover:text-amber-500 transition">
-            View Full Table →
-          </Link>
+        <div className="flex items-center justify-center mb-6">
+          <h3 className="text-2xl font-bold text-gray-500 ">RC League Table</h3>
         </div>
 
         {/* Table */}
-        <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
+        <div className="bg-white rounded-md shadow-sm overflow-hidden sm:w-full p-2">
           <Table>
             <TableCaption className="text-xs">Match day 5</TableCaption>
-
             <TableHeader>
               <TableRow>
                 <TableHead className="w-15">Pos</TableHead>
@@ -52,7 +48,7 @@ export const TableStandings: React.FC = () => {
 
             <TableBody>
               {table.map((row, i) => (
-                <TableRow key={i} className="hover:bg-muted/50 transition">
+                <TableRow key={i} className={` hover:bg-muted/50 transition odd:bg-slate-50 even:bg-slate-100`}>
                   <TableCell className="font-semibold">{row.pos}</TableCell>
                   <TableCell className="font-medium text-gray-900">{row.team}</TableCell>
                   <TableCell className="text-center">{row.played}</TableCell>

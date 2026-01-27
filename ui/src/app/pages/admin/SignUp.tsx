@@ -38,8 +38,8 @@ export const SignUp: React.FC = () => {
     }
   };
   return (
-    <div className="flex justify-center py-12 px-6">
-      <Card className="w-full max-w-sm sm:max-w-lg">
+    <div className="flex justify-center py-12">
+      <Card className="w-full max-w-xs sm:max-w-lg">
         <CardHeader>
           <CardTitle>Add Admin Account</CardTitle>
         </CardHeader>

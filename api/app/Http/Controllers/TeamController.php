@@ -11,9 +11,9 @@ class TeamController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        //
+    public function index() {
+        $teams = Team::all();
+        return response()->json(["message"=>"Teams fetched", "teams"=>$teams], 200);
     }
 
     /**

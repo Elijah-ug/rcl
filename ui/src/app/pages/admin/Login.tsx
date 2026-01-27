@@ -25,17 +25,17 @@ export const Login: React.FC = () => {
       }
       const res = await login(credentials);
       const headers = res?.data?.token_type + " " + res?.data?.token;
-      console.log("")
+      console.log("res=>", res);
       localStorage.setItem("token", headers);
-      return navigate("/admin-dashboard");
+      return navigate("/admin-dashboard", { replace: true });
     } catch (error) {
       console.log("login error=>", error);
       return toast.error("Login failed!");
     }
   };
   return (
-    <div className="flex justify-center ">
-      <Card className="w-full max-w-sm">
+    <div className="flex justify-center py-12">
+      <Card className="w-full max-w-xs sm:max-w-lg">
         <CardHeader>
           <CardTitle>Login to your account</CardTitle>
           <CardAction>

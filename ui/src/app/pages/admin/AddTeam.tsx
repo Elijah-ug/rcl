@@ -1,4 +1,4 @@
-import { useRegisterTeamMutation } from "@/app/state/features/auth/teamQuery";
+import { useRegisterTeamMutation } from "@/app/state/features/teams/teamQuery";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -29,7 +29,7 @@ export const AddTeam: React.FC = () => {
   };
   return (
     <div className="flex items-cente justify-center ">
-      <Card className="w-full max-w-sm">
+      <Card className="w-full max-w-xs sm:max-w-lg">
         <CardHeader>
           <CardTitle>Add Team</CardTitle>
         </CardHeader>

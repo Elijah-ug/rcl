@@ -21,7 +21,7 @@ export const UpcomingMatches: React.FC = () => {
   ];
 
   return (
-    <section className="py-16 ">
+    <section className="py-16 sm:w-3xl mx-auto">
       <div className="">
         {/* Section Header */}
         <div className="flex items-center justify-between mb-8">

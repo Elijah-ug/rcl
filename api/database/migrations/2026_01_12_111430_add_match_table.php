@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('matches', function (Blueprint $table) {
+        Schema::create('events', function (Blueprint $table) {
             $table->id();
             // foreig keys
             $table->foreignId("host_team_id")->constrained("teams")->onDelete("cascade");
             $table->foreignId("visitor_team_id")->constrained("teams")->onDelete("cascade");
             // match details
-            $table->dateTime("date");
-            $table->dateTime("time");
+            $table->date("date");
+            $table->time("time");
             $table->string("venue");
             $table->timestamps();
         });

@@ -2,12 +2,13 @@ import React from 'react'
 
 export const About:React.FC = () => {
   return (
-    <section className="py-16 ">
-  <h2 className="text-2xl font-bold text-gray-900 text-center mb-10">
+    <section className="py-16 sm:flex sm:items-center justify-center">
+  <div className="">
+    <h2 className="text-2xl font-bold text-gray-900 text-center mb-10">
     What We Do
   </h2>
 
-  <div className="grid gap-6 sm:grid-cols-3 ">
+  <div className="grid gap-6 sm:grid-cols-3 place-items-center">
     {[
       {
         title: "Competitive Matches",
@@ -27,7 +28,7 @@ export const About:React.FC = () => {
     ].map((item, i) => (
       <div
         key={i}
-        className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition"
+        className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition "
       >
         <div className="text-3xl mb-4">{item.icon}</div>
         <h3 className="font-semibold text-gray-900 mb-2">
@@ -38,6 +39,7 @@ export const About:React.FC = () => {
         </p>
       </div>
     ))}
+  </div>
   </div>
 </section>
 

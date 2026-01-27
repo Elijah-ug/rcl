@@ -13,10 +13,11 @@ export const Home: React.FC = () => {
       <LandingPage />
       <div className="grid gap-7 px-6 sm:px-10 lg:px-13 bg-gray-100">
         <About />
+         <NewsSection />
         <UpcomingMatches />
         <LeagueTablePreview />
         <Sponsors />
-        <NewsSection />
+       
         <LatestResults />
       </div>
     </div>

@@ -7,11 +7,9 @@ import React, { useState, type FormEvent } from "react";
 import { LoadingSpinner } from "./LoadingSpinner";
 import { toast } from "react-toastify";
 import { useRegisterMatchMutation } from "@/app/state/features/matches/matchesQuery";
-import { useNavigate } from "react-router-dom";
 
-export const CreateMatches: React.FC = () => {
+export const AddNewsPost: React.FC = () => {
   const [addMatch, { isLoading }] = useRegisterMatchMutation();
-  const navigate = useNavigate();
   const { data: teams, isLoading: loadingTeams } = useGetAllTeamsQuery();
   const [credentials, setCredentials] = useState<object | any>({
     host_team_id: "",
@@ -24,16 +22,16 @@ export const CreateMatches: React.FC = () => {
   const handleAddMatch = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      console.log("Va lues ==>", credentials);
-      console.log("type of time ==>", typeof credentials.time, credentials.time);
+      console.log("Values ==>", credentials);
       const res = await addMatch({
         ...credentials,
         host_team_id: Number(credentials.host_team_id),
         visitor_team_id: Number(credentials.visitor_team_id),
       });
+      if (res?.error) {
+        toast.error(res?.error.data.message);
+      }
       console.log("Response==>", res);
-      toast.success("Match Added");
-      return navigate("/admin-dashboard");
     } catch (error) {
       console.log("An error=>", error);
       return toast.error("Failed to add team!");
@@ -41,7 +39,7 @@ export const CreateMatches: React.FC = () => {
   };
   return (
     <div className="flex items-cente justify-center ">
-      <Card className="w-full max-w-xs sm:max-w-lg">
+      <Card className="w-full max-w-sm">
         <CardHeader>
           <CardTitle>Add Team</CardTitle>
         </CardHeader>
@@ -66,7 +64,7 @@ export const CreateMatches: React.FC = () => {
                           <option key={team.id} value={team.id}>
                             {team.name}
                           </option>
-                        ),
+                        )
                     )}
                 </select>
               </div>
@@ -89,7 +87,7 @@ export const CreateMatches: React.FC = () => {
                           <option key={team.id} value={team.id}>
                             {team.name}
                           </option>
-                        ),
+                        )
                     )}
                 </select>
               </div>

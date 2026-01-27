@@ -1,17 +1,19 @@
 import { Menu, X } from "lucide-react";
 import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { useGetAdminQuery } from "../state/features/auth/adminAuthQuery";
 
 export const NavBar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-
+  const { data } = useGetAdminQuery();
+  console.log("Data=>", data);
   const routes = [
     { name: "Home", link: "/" },
     { name: "About", link: "about" },
     { name: "Table Standings", link: "table-standings" },
     { name: "Dinner", link: "dinner" },
     { name: "Gallery", link: "gallery" },
-    { name: "Dashboard", link: "admin-dashboard" },
+    { name: data ? "Dashboard" : "Login", link: data ? "admin-dashboard" : "login" },
   ];
 
   const navItemClass = ({ isActive }: { isActive: boolean }) =>

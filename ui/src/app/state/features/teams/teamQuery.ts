@@ -1,4 +1,4 @@
-import type { AddTeam } from "@/types/types";
+import type { AddTeam, FetchTeam } from "@/types/types";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const teamQuery = createApi({
@@ -15,9 +15,9 @@ export const teamQuery = createApi({
   }),
   tagTypes: ["Teams"],
   endpoints: (builder) => ({
-    getAllTeams: builder.query<any, void>({
+    getAllTeams: builder.query<FetchTeam, void>({
       query: () => ({
-        url: "",
+        url: "/",
         method: "GET",
       }),
       providesTags: ["Teams"],

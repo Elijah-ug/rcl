@@ -18,7 +18,7 @@ export const NewsSection: React.FC = () => {
   ];
 
   return (
-    <section className="py-16 ">
+    <section className="py-16 sm:flex sm:items-center justify-center">
       <div className="">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">

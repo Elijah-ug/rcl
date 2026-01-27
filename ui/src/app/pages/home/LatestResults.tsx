@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export const LatestResults: React.FC = () => {
   const results = [
@@ -19,11 +20,16 @@ export const LatestResults: React.FC = () => {
   ];
 
   return (
-    <section className="py-16">
-      <div className="max-w-5xl mx-auto">
-        <h2 className="text-2xl font-bold text-gray-900 mb-8">Latest Results</h2>
+    <section className="py-16 sm:flex sm:items-center justify-center">
+      <div className="sm:w-xl">
+        <div className="flex items-center justify-between mb-8">
+          <h2 className="text-2xl  font-bold text-gray-500">Latest Results</h2>
+          <Link to="/table-standings" className="text-sm font-medium text-amber-600 hover:text-amber-500 transition">
+            View Full Table →
+          </Link>
+        </div>
 
-        <div className="grid gap-4">
+        <div className="grid gap-1">
           {results.map((match, i) => (
             <div
               key={i}
