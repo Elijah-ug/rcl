@@ -45,7 +45,7 @@ export const AddPlayer: React.FC = () => {
                   id="team"
                   value={credentials.team}
                   onChange={(e) => setCredentials({ ...credentials, team: e.target.value })}
-                  className="p-1.5                                                                                                                                             border-2 rounded"
+                  className="p-1.5 border-2 rounded"
                 >
                   <option value="___">Select Team</option>
                   {teams &&
