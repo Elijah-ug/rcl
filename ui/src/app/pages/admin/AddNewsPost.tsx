@@ -1,4 +1,3 @@
-import { useGetAllTeamsQuery } from "@/app/state/features/teams/teamQuery";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -6,31 +5,27 @@ import { Label } from "@/components/ui/label";
 import React, { useState, type FormEvent } from "react";
 import { LoadingSpinner } from "./LoadingSpinner";
 import { toast } from "react-toastify";
-import { useRegisterMatchMutation } from "@/app/state/features/matches/matchesQuery";
+import { useAddNewsPostMutation, useGetAllNewsPostsQuery } from "@/app/state/features/news/newsQuery";
 
 export const AddNewsPost: React.FC = () => {
-  const [addMatch, { isLoading }] = useRegisterMatchMutation();
-  const { data: teams, isLoading: loadingTeams } = useGetAllTeamsQuery();
+  const [addNews, { isLoading }] = useAddNewsPostMutation();
+  const { data: news, isLoading: newsLoading } = useGetAllNewsPostsQuery();
+  console.log("News fetched==>", news);
   const [credentials, setCredentials] = useState<object | any>({
-    host_team_id: "",
-    visitor_team_id: "",
-    venue: "",
-    date: "",
-    time: "",
+    title: "",
+    description: "",
   });
 
-  const handleAddMatch = async (e: FormEvent<HTMLFormElement>) => {
+  const handlAddNews = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       console.log("Values ==>", credentials);
-      const res = await addMatch({
+      const res = await addNews({
         ...credentials,
         host_team_id: Number(credentials.host_team_id),
-        visitor_team_id: Number(credentials.visitor_team_id),
+        title: Number(credentials.title),
       });
-      if (res?.error) {
-        toast.error(res?.error.data.message);
-      }
+
       console.log("Response==>", res);
     } catch (error) {
       console.log("An error=>", error);
@@ -44,82 +39,25 @@ export const AddNewsPost: React.FC = () => {
           <CardTitle>Add Team</CardTitle>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleAddMatch}>
+          <form onSubmit={handlAddNews}>
             <div className="flex flex-col gap-6">
               <div className="grid gap-2">
-                <Label htmlFor="team">Home Team</Label>
-                <select
-                  name="Teams"
-                  id="teams"
-                  value={credentials.host_team_id}
-                  onChange={(e) => setCredentials({ ...credentials, host_team_id: e.target.value })}
-                  className="p-1 border-2 rounded"
-                >
-                  <option value="____" className="text-xs"></option>
-                  {teams &&
-                    !loadingTeams &&
-                    teams.teams.map(
-                      (team) =>
-                        Number(credentials.visitor_team_id) !== Number(team.id) && (
-                          <option key={team.id} value={team.id}>
-                            {team.name}
-                          </option>
-                        )
-                    )}
-                </select>
-              </div>
-              {/* away team */}
-              <div className="grid gap-2">
-                <Label htmlFor="team">Away Team</Label>
-                <select
-                  name="Teams"
-                  id="teams"
-                  value={credentials.visitor_team_id}
-                  onChange={(e) => setCredentials({ ...credentials, visitor_team_id: e.target.value })}
-                  className="p-1 border-2 rounded"
-                >
-                  <option value="____" className="text-xs"></option>
-                  {teams &&
-                    !loadingTeams &&
-                    teams.teams.map(
-                      (team) =>
-                        Number(credentials.host_team_id) !== Number(team.id) && (
-                          <option key={team.id} value={team.id}>
-                            {team.name}
-                          </option>
-                        )
-                    )}
-                </select>
-              </div>
-              {/*  */}
-
-              <div className="grid gap-2">
-                <Label htmlFor="date">Date</Label>
+                <Label htmlFor="title">Title</Label>
                 <Input
-                  id="date"
-                  type="date"
-                  value={credentials.date}
-                  onChange={(e) => setCredentials({ ...credentials, date: e.target.value })}
+                  id="title"
+                  type="text"
+                  value={credentials.title}
+                  onChange={(e) => setCredentials({ ...credentials, title: e.target.value })}
                 />
               </div>
 
               <div className="grid gap-2">
-                <Label htmlFor="time">Time</Label>
+                <Label htmlFor="description">description</Label>
                 <Input
-                  id="time"
-                  type="time"
-                  value={credentials.time}
-                  onChange={(e) => setCredentials({ ...credentials, time: e.target.value })}
-                />
-              </div>
-
-              <div className="grid gap-2">
-                <Label htmlFor="venue">Venue</Label>
-                <Input
-                  id="venue"
-                  type="venue"
-                  value={credentials.venue}
-                  onChange={(e) => setCredentials({ ...credentials, venue: e.target.value })}
+                  id="description"
+                  type="text"
+                  value={credentials.description}
+                  onChange={(e) => setCredentials({ ...credentials, description: e.target.value })}
                 />
               </div>
 

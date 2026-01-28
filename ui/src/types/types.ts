@@ -50,3 +50,10 @@ export type AddMatch = {
   date: Date;
   time: Date;
 };
+
+export type FetchNews = {};
+
+export type AddNewsPost = {
+  title: string;
+  description: string;
+};

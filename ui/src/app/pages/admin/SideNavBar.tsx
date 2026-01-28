@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { User, Users, Calendar, UserPlus, Trophy, Menu } from "lucide-react";
+import { User, Users, Calendar, UserPlus, Trophy, Menu, Newspaper } from "lucide-react";
 
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
@@ -13,6 +13,7 @@ export const SideNavBar: React.FC = () => {
     { label: "Add Team", to: "add-team", icon: Users },
     { label: "Matches", to: "create-matches", icon: Calendar },
     { label: "Register Player", to: "register-players", icon: UserPlus },
+    { label: "News", to: "news", icon: Newspaper },
     { label: "Update Match Results", to: "update-match-results", icon: Trophy },
   ];
 
@@ -26,7 +27,7 @@ export const SideNavBar: React.FC = () => {
           className={({ isActive }) =>
             clsx(
               "flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition",
-              isActive ? "bg-amber-400 text-primary-foreground" : "hover:bg-muted"
+              isActive ? "bg-amber-400 text-primary-foreground" : "hover:bg-muted",
             )
           }
         >
