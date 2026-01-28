@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MatchController;
+use App\Http\Controllers\NewsController;
 use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\ResultController;
 use App\Http\Controllers\TeamController;
@@ -54,7 +55,7 @@ Route::controller(PlayerController::class)->group(function(){
 });
 
 // news routes
-Route::controller(ResultController::class)->group(function(){
+Route::controller( NewsController::class)->group(function(){
      Route::post("/rcl/news/registration", "store")->middleware("auth:admin");
     Route::get("/rcl/news", "index");
     Route::get("/rcl/news/{news}", "show");

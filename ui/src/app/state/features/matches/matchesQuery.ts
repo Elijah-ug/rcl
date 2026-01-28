@@ -1,4 +1,4 @@
-import type { AddTeam, FetchTeam } from "@/types/types";
+import type { AddTeam, MatchRes } from "@/types/types";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const matchQuery = createApi({
@@ -15,7 +15,7 @@ export const matchQuery = createApi({
   }),
   tagTypes: ["Match"],
   endpoints: (builder) => ({
-    getAllMatches: builder.query<FetchTeam, void>({
+    getAllMatches: builder.query<MatchRes, void>({
       query: () => ({
         url: "/",
         method: "GET",

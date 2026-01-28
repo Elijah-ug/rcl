@@ -11,9 +11,9 @@ class MatchController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        //
+    public function index(){
+        $matches = Event::all();
+        return response()->json(["message"=>"matches fetched", "data"=>$matches]);
     }
 
     /**

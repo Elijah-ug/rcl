@@ -17,6 +17,8 @@ import { AddPlayer } from "./app/pages/admin/AddPlayer";
 import { UpdateMatchResults } from "./app/pages/admin/UpdateMatchResults";
 import { CreateMatches } from "./app/pages/admin/CreateMatches";
 import { AddNewsPost } from "./app/pages/admin/AddNewsPost";
+import { Results } from "./app/pages/results/Results";
+import { Login } from "./app/pages/admin/Login";
 export const App: React.FC = () => {
   return (
     <div className="flex flex-col min-h-screen bg-gray-200">
@@ -37,9 +39,11 @@ export const App: React.FC = () => {
             <Route path="table-standings" element={<TableStandings />} />
             <Route path="dinner" element={<Dinner />} />
             <Route path="gallery" element={<Gallery />} />
+            <Route path="results" element={<Results />} />
 
             {/* off pages */}
             <Route path="signup" element={<SignUp />} />
+            <Route path="login" element={<Login />} />
           </Routes>
         </div>
       </div>

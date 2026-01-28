@@ -13,7 +13,7 @@ export const LeagueTablePreview: React.FC = () => {
 
   return (
     <section className="py-16 sm:flex sm:items-center justify-center">
-      <div className="sm:grid sm:place-items-center sm:w-xl">
+      <div className="sm:grid sm:place-items-center sm:w-3xl mx-auto">
         {/* Header */}
         <div className="flex items-center justify-between mb-6 sm:w-full">
           <h3 className="text-2xl font-bold text-gray-500">League Table</h3>
@@ -23,7 +23,7 @@ export const LeagueTablePreview: React.FC = () => {
         </div>
 
         {/* Table */}
-        <div className="bg-white rounded-md shadow-sm overflow-hidden sm:w-full  p-2">
+        <div className="bg-white rounded-md shadow-sm overflow-hidden sm:w-full  sm:p-7">
           <Table>
             <TableCaption className="text-xs">Top 4 giants of RCL</TableCaption>
 

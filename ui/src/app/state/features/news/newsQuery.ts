@@ -1,9 +1,18 @@
-import type { AddNewsPost, FetchNews } from "@/types/types";
+import type { AddNewsPost, AddNewsResponse, FetchNews } from "@/types/types";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const newsQuery = createApi({
   reducerPath: "news",
-  baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_NEWS_BASE_URL }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: import.meta.env.VITE_NEWS_BASE_URL,
+    prepareHeaders: (headers) => {
+      const token = localStorage.getItem("token");
+      if (token) {
+        headers.set("authorization", token);
+      }
+      return headers;
+    },
+  }),
   tagTypes: ["NewsPosts"],
   endpoints: (builder) => ({
     getAllNewsPosts: builder.query<FetchNews, void>({
@@ -15,7 +24,7 @@ export const newsQuery = createApi({
     }),
 
     // add news
-    addNewsPost: builder.mutation<AddNewsPost, any>({
+    addNewsPost: builder.mutation<AddNewsResponse, AddNewsPost>({
       query: (body) => ({
         url: "/registration",
         method: "POST",

@@ -5,12 +5,12 @@ import { Label } from "@/components/ui/label";
 import React, { useState, type FormEvent } from "react";
 import { LoadingSpinner } from "./LoadingSpinner";
 import { toast } from "react-toastify";
-import { useAddNewsPostMutation, useGetAllNewsPostsQuery } from "@/app/state/features/news/newsQuery";
+import { useAddNewsPostMutation } from "@/app/state/features/news/newsQuery";
+import { useNavigate } from "react-router-dom";
 
 export const AddNewsPost: React.FC = () => {
   const [addNews, { isLoading }] = useAddNewsPostMutation();
-  const { data: news, isLoading: newsLoading } = useGetAllNewsPostsQuery();
-  console.log("News fetched==>", news);
+  const navigate = useNavigate();
   const [credentials, setCredentials] = useState<object | any>({
     title: "",
     description: "",
@@ -20,13 +20,10 @@ export const AddNewsPost: React.FC = () => {
     e.preventDefault();
     try {
       console.log("Values ==>", credentials);
-      const res = await addNews({
-        ...credentials,
-        host_team_id: Number(credentials.host_team_id),
-        title: Number(credentials.title),
-      });
-
-      console.log("Response==>", res);
+      const res = await addNews(credentials);
+      console.log("News added==>", res);
+      toast.success("News has been posted!");
+      return navigate("/admin-dashboard");
     } catch (error) {
       console.log("An error=>", error);
       return toast.error("Failed to add team!");

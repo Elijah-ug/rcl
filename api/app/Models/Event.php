@@ -9,10 +9,10 @@ class Event extends Model
     //
         protected $fillable=["host_team_id", "visitor_team_id", "date", "time", "venue"];
         public function host(){
-            return $this->belongsTo(Team::class);
+            return $this->belongsTo(Team::class, "host_team_id");
         }
         public function visitor(){
-            return $this->belongsTo(Team::class);
+            return $this->belongsTo(Team::class, "visitor_team_id");
         }
 
 }

@@ -54,11 +54,11 @@ export const Dinner: React.FC = () => {
       </section>
 
       {/* How It Works */}
-      <section className="py-16 px-6 sm:px-12 bg-white">
+      <section className="py-16 px-6 sm:px-12 ">
         <h2 className="text-2xl font-bold text-center mb-10">How the Dinner Is Organized</h2>
 
         <div className="grid sm:grid-cols-3 gap-8">
-          <div className="text-center">
+          <div className="text-center bg-white p-3">
             <h3 className="font-semibold mb-2">1. Match Day</h3>
             <p className="text-gray-600 text-sm">
               Teams compete in scheduled league fixtures under fair and professional standards.

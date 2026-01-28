@@ -42,6 +42,17 @@ export type FetchTeam = {
   message: string;
   teams: Teams[];
 };
+type Match = {
+  created_at: Date;
+  date: String;
+  host_team_id: number;
+  id: number;
+  is_played: false;
+  time: String;
+  updated_at: Date;
+  venue: string;
+  visitor_team_id: number;
+};
 
 export type AddMatch = {
   host_team_id: number;
@@ -50,10 +61,27 @@ export type AddMatch = {
   date: Date;
   time: Date;
 };
+export type MatchRes = {
+  message: string;
+  data: Match[];
+};
 
-export type FetchNews = {};
-
+type Data = {
+  title: string;
+  description: string;
+  updated_at: Date;
+  created_at: Date;
+  id: number;
+};
 export type AddNewsPost = {
   title: string;
   description: string;
+  image: string | null;
+};
+export type AddNewsResponse = {
+  message: string;
+  data: Data;
+};
+export type FetchNews = {
+  data: Data[];
 };

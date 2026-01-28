@@ -1,24 +1,11 @@
+import { useGetAllMatchesQuery } from "@/app/state/features/matches/matchesQuery";
+import { Spinner } from "@/components/ui/spinner";
 import React from "react";
 
 export const UpcomingMatches: React.FC = () => {
-  const matches = [
-    {
-      home: "Stanbic FC",
-      away: "Kigezi Corp",
-      date: "24 Feb 2026",
-      time: "4:00 PM",
-      venue: "Rubanda Stadium",
-      round: "Matchday 5",
-    },
-    {
-      home: "PostBank FC",
-      away: "MTN United",
-      date: "25 Feb 2026",
-      time: "6:00 PM",
-      venue: "Rubanda Stadium",
-      round: "Matchday 5",
-    },
-  ];
+  
+  const { data, isLoading } = useGetAllMatchesQuery();
+  console.log("all matches==>", data);
 
   return (
     <section className="py-16 sm:w-3xl mx-auto">
@@ -30,29 +17,35 @@ export const UpcomingMatches: React.FC = () => {
         </div>
 
         {/* Matches */}
-        <div className="grid gap-3 sm:gap-4">
-          {matches.map((match, i) => (
-            <div
-              key={i}
-              className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border bg-white border-gray-200 rounded-xl px-6 py-4 hover:shadow-md transition"
-            >
-              {/* Teams */}
-              <div className="flex items-center gap-4 font-semibold text-gray-900">
-                <span>{match.home}</span>
-                <span className="text-gray-400">vs</span>
-                <span>{match.away}</span>
-              </div>
+        {isLoading ? (
+          <Spinner className="size-8" />
+        ) : data ? (
+          <div className="grid gap-3 sm:gap-4">
+            {data.data.map((match, i) => (
+              <div
+                key={i}
+                className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border bg-white border-gray-200 rounded-xl px-6 py-4 hover:shadow-md transition"
+              >
+                {/* Teams */}
+                {/* <div className="flex items-center gap-4 font-semibold text-gray-900">
+                  <span>{match.home}</span>
+                  <span className="text-gray-400">vs</span>
+                  <span>{match.away}</span>
+                </div> */}
 
-              {/* Match Info */}
-              <div className="flex flex-wrap gap-4 text-sm text-gray-600">
-                <span>📅 {match.date}</span>
-                <span>⏰ {match.time}</span>
-                <span>📍 {match.venue}</span>
-                <span className="text-amber-600 font-medium">{match.round}</span>
+                {/* Match Info */}
+                <div className="flex flex-wrap gap-4 text-sm text-gray-600">
+                  <span>📅 {match.date}</span>
+                  <span>⏰ {match.time}</span>
+                  <span>📍 {match.venue}</span>
+                  {/* <span className="text-amber-600 font-medium">{match.round}</span> */}
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <h3 className="text-center text-xl font-semibold">No Matches Updates Yet!, Keep an eye for updates</h3>
+        )}
       </div>
     </section>
   );
