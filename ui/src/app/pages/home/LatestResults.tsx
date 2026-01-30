@@ -20,7 +20,7 @@ export const LatestResults: React.FC = () => {
   ];
 
   return (
-    <section className="py-16 sm:flex sm:items-center justify-center">
+    <section className="sm:flex sm:items-center justify-center">
       <div className="sm:w-3xl">
         <div className="flex items-center justify-between mb-8">
           <h2 className="text-2xl  font-bold text-gray-500">Latest Results</h2>
@@ -29,7 +29,7 @@ export const LatestResults: React.FC = () => {
           </Link>
         </div>
 
-        <div className="grid gap-1">
+        <div className="grid gap-1 bg-gray-300 ">
           {results.map((match, i) => (
             <div
               key={i}

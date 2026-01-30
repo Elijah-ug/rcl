@@ -8,7 +8,7 @@ export const UpcomingMatches: React.FC = () => {
   console.log("all matches==>", data);
 
   return (
-    <section className="py-16 sm:w-3xl mx-auto">
+    <section className=" lg:w-3xl mx-auto h-screen ">
       <div className="">
         {/* Section Header */}
         <div className="flex items-center justify-between mb-8">
@@ -20,11 +20,11 @@ export const UpcomingMatches: React.FC = () => {
         {isLoading ? (
           <Spinner className="size-8" />
         ) : data ? (
-          <div className="grid gap-3 sm:gap-4">
-            {data.data.map((match, i) => (
+          <div className="flex flex-col justify-center gap-3 sm:gap-4 sm:w-2xl">
+            {data.data.map((match) => (
               <div
-                key={i}
-                className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border bg-white border-gray-200 rounded-xl px-6 py-4 hover:shadow-md transition"
+                key={match.id}
+                className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border bg-white border-gray-200 shadow-lg rounded-xl px-6 py-4 hover:shadow-md transition max-w-full sm:w-smm"
               >
                 {/* Teams */}
                 {/* <div className="flex items-center gap-4 font-semibold text-gray-900">
@@ -44,7 +44,9 @@ export const UpcomingMatches: React.FC = () => {
             ))}
           </div>
         ) : (
-          <h3 className="text-center text-xl font-semibold">No Matches Updates Yet!, Keep an eye for updates</h3>
+          <div className="flex justify-center items-center h-screen">
+            <h3 className="font-semibold text-lg text-amber-600">No Matches Updates Yet!, Keep an eye for updates!</h3>
+          </div>
         )}
       </div>
     </section>

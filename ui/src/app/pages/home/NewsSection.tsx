@@ -7,21 +7,20 @@ export const NewsSection: React.FC = () => {
   const { data, isLoading } = useGetAllNewsPostsQuery();
 
   return (
-    <section className="py-16 sm:flex sm:items-center justify-center">
+    <section className="sm:flex items-center justify-center min-h-screen">
       {isLoading ? (
         <Spinner className="size-8" />
       ) : data ? (
         <div className="">
           {/* Header */}
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-2xl font-bold text-gray-900">Latest News</h2>
-          </div>
+          
+            <h2 className="text-2xl font-bold text-gray-900 text-center">Latest News</h2>
 
-          <div className="grid gap-3 sm:grid-cols-4">
+          <div className="grid gap-3 sm:grid-cols-4 place-items-center">
             {data.data.map((item) => (
               <div
                 key={item.id}
-                className="border border-gray-200 bg-white rounded-2xl  hover:shadow-md transition w-full max-w-xs  "
+                className="border border-gray-200 bg-white rounded-2xl  hover:shadow-md transition max-w-full w-xs sm:w-sm "
               >
                 <img src={backgroundImagwe1} alt="" className="rounded-t-2xl" />
                 <div className="grid p-3">
@@ -34,7 +33,9 @@ export const NewsSection: React.FC = () => {
           </div>
         </div>
       ) : (
-        <h3 className="text-center text-xl font-semibold">No News Posts Yet!</h3>
+        <div className="flex justify-center items-center h-screen">
+          <h3 className="font-semibold text-lg text-amber-600">No News Articles Yet!, Keep an eye for updates!</h3>
+        </div>
       )}
     </section>
   );

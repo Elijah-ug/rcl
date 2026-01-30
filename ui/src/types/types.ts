@@ -52,6 +52,7 @@ type Match = {
   updated_at: Date;
   venue: string;
   visitor_team_id: number;
+  matchday: number;
 };
 
 export type AddMatch = {
@@ -60,8 +61,9 @@ export type AddMatch = {
   venue: string;
   date: Date;
   time: Date;
+  matchday: number;
 };
-export type MatchRes = {
+export type MatchResponse = {
   message: string;
   data: Match[];
 };

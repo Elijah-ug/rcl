@@ -1,26 +1,30 @@
 import { useGetAllTeamsQuery } from "@/app/state/features/teams/teamQuery";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import React, { useState, type FormEvent } from "react";
 import { LoadingSpinner } from "./LoadingSpinner";
 import { toast } from "react-toastify";
-import { useRegisterMatchMutation } from "@/app/state/features/matches/matchesQuery";
+import { useGetAllMatchesQuery, useRegisterMatchMutation } from "@/app/state/features/matches/matchesQuery";
 import { useNavigate } from "react-router-dom";
+import type { SerializedError } from "@reduxjs/toolkit";
 
 export const CreateMatches: React.FC = () => {
-  const [addMatch, { isLoading }] = useRegisterMatchMutation();
-  const navigate = useNavigate();
+  const [addMatch, { isLoading, error }] = useRegisterMatchMutation();
   const { data: teams, isLoading: loadingTeams } = useGetAllTeamsQuery();
+  const { data: matches, isLoading: loadingMatches } = useGetAllMatchesQuery();
+  const navigate = useNavigate();
+
   const [credentials, setCredentials] = useState<object | any>({
+    matchday: "",
     host_team_id: "",
     visitor_team_id: "",
     venue: "",
     date: "",
     time: "",
   });
-
+  const [day, setDay] = useState<Array<number>>([]);
   const handleAddMatch = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
@@ -32,13 +36,24 @@ export const CreateMatches: React.FC = () => {
         visitor_team_id: Number(credentials.visitor_team_id),
       });
       console.log("Response==>", res);
-      toast.success("Match Added");
-      return navigate("/admin-dashboard");
+      if (res?.data) {
+        toast.success("Match Added");
+        return navigate("/admin-dashboard");
+      }
     } catch (error) {
       console.log("An error=>", error);
       return toast.error("Failed to add team!");
     }
   };
+  // map through matches, 2. check if any team has a fixed match that's equal to the user input,
+  // const isFixed:boolean =()=> {
+  matches?.data.map((match) =>  (match.matchday === parseInt(credentials.matchday))  
+      // day.push(match.matchday);
+    
+  );
+
+  console.log("day", day);
+  // }
   return (
     <div className="flex items-cente justify-center ">
       <Card className="w-full max-w-xs sm:max-w-lg">
@@ -48,6 +63,16 @@ export const CreateMatches: React.FC = () => {
         <CardContent>
           <form onSubmit={handleAddMatch}>
             <div className="flex flex-col gap-6">
+              <div className="grid gap-2">
+                <Label htmlFor="matchday">Matchday</Label>
+                <Input
+                  id="matchday"
+                  type="number"
+                  value={credentials.matchday}
+                  onChange={(e) => setCredentials({ ...credentials, matchday: e.target.value })}
+                />
+              </div>
+
               <div className="grid gap-2">
                 <Label htmlFor="team">Home Team</Label>
                 <select
@@ -131,6 +156,13 @@ export const CreateMatches: React.FC = () => {
             </div>
           </form>
         </CardContent>
+        {error && (
+          <CardFooter>
+            <p className="text-sm text-red-500">
+              {"data" in error ? (error.data as any).message : (error as SerializedError).message}!
+            </p>
+          </CardFooter>
+        )}
       </Card>
     </div>
   );

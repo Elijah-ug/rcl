@@ -1,14 +1,15 @@
+import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import React from 'react'
 
 export const About:React.FC = () => {
   return (
-    <section className="py-16 sm:flex sm:items-center justify-center">
+    <section className="sm:flex sm:items-center justify-center">
   <div className="">
     <h2 className="text-2xl font-bold text-gray-900 text-center mb-10">
     What We Do
   </h2>
 
-  <div className="grid gap-6 sm:grid-cols-3 place-items-center">
+  <div className="grid gap-3 sm:grid-cols-3 place-items-center">
     {[
       {
         title: "Competitive Matches",
@@ -26,18 +27,15 @@ export const About:React.FC = () => {
         icon: "🤝",
       },
     ].map((item, i) => (
-      <div
-        key={i}
-        className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition "
-      >
-        <div className="text-3xl mb-4">{item.icon}</div>
-        <h3 className="font-semibold text-gray-900 mb-2">
-          {item.title}
-        </h3>
-        <p className="text-sm text-gray-600 leading-relaxed">
-          {item.desc}
-        </p>
-      </div>
+      
+        <Card key={i} className='max-w-full w-xs sm:w-sm'>
+          <CardHeader>{item.icon}</CardHeader>
+                      <CardContent className="p-6">
+                        <h3 className="font-semibold text-lg mb-2">{item.title}</h3>
+                        <p className="text-gray-600 text-sm">{item.desc}</p>
+                      </CardContent>
+                    </Card>
+
     ))}
   </div>
   </div>

@@ -17,19 +17,20 @@ class AddMatchRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "host_team_id"=>["required", "exists:teams,id", "different:visitor"],
-            "visitor_team_id"=>["required", "exists:teams,id", "different:host"],
+            "host_team_id"=>["required", "exists:teams,id", "different:visitor_team_id"],
+            "visitor_team_id"=>["required", "exists:teams,id", "different:host_team_id"],
             "date"=>["required", "after_or_equal:today"],
             "time"=>["nullable", "date_format:H:i"],
             "venue"=>["required", "string", "min:3", "max:100"],
-            "is_played"=>["nullable", "boolean"]
+            "is_played"=>["nullable", "boolean"],
+            "matchday"=>["integer","min:1", "max:50"]
         ];
     }
     public function messages(){
         return[
             "host_team_id.different"=>"Host and visitor must be different",
             "visitor_team_id.different"=>"Visitor and host must be different",
-            "date.after_or_equals"=>"Match date cannot be past"
+            "date.after_or_equal"=>"Match date cannot be past"
         ];
     }
 }

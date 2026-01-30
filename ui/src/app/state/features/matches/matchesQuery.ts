@@ -1,4 +1,4 @@
-import type { AddTeam, MatchRes } from "@/types/types";
+import type { AddMatch, AddTeam, MatchResponse } from "@/types/types";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const matchQuery = createApi({
@@ -15,7 +15,7 @@ export const matchQuery = createApi({
   }),
   tagTypes: ["Match"],
   endpoints: (builder) => ({
-    getAllMatches: builder.query<MatchRes, void>({
+    getAllMatches: builder.query<MatchResponse, void>({
       query: () => ({
         url: "/",
         method: "GET",
@@ -30,7 +30,7 @@ export const matchQuery = createApi({
       providesTags: ["Match"],
     }),
 
-    registerMatch: builder.mutation<AddTeam, any>({
+    registerMatch: builder.mutation<MatchResponse,AddMatch>({
       query: (body) => ({
         url: "/registration",
         method: "POST",
@@ -38,7 +38,7 @@ export const matchQuery = createApi({
       }),
       invalidatesTags: ["Match"],
     }),
-    updateMatch: builder.mutation<AddTeam, any>({
+    updateMatch: builder.mutation<MatchResponse, any>({
       query: (body) => ({
         url: "/registration",
         method: "POST",
