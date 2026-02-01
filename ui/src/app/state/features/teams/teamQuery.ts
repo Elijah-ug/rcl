@@ -23,8 +23,16 @@ export const teamQuery = createApi({
       providesTags: ["Teams"],
     }),
     getTeam: builder.query<any, void>({
-      query: (news) => ({
-        url: `/${news}`,
+      query: (team) => ({
+        url: `/${team}`,
+        method: "GET",
+      }),
+      providesTags: ["Teams"],
+    }),
+
+    getUnfixedTeams: builder.query<FetchTeam, number>({
+      query: (matchday) => ({
+        url: `/unfixed/${matchday}`,
         method: "GET",
       }),
       providesTags: ["Teams"],
@@ -39,4 +47,4 @@ export const teamQuery = createApi({
     }),
   }),
 });
-export const { useGetAllTeamsQuery, useGetTeamQuery, useRegisterTeamMutation } = teamQuery;
+export const { useGetAllTeamsQuery, useGetTeamQuery, useGetUnfixedTeamsQuery, useRegisterTeamMutation } = teamQuery;

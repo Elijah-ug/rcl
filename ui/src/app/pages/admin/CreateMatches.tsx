@@ -1,4 +1,4 @@
-import { useGetAllTeamsQuery } from "@/app/state/features/teams/teamQuery";
+import { useGetUnfixedTeamsQuery } from "@/app/state/features/teams/teamQuery";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -6,14 +6,11 @@ import { Label } from "@/components/ui/label";
 import React, { useState, type FormEvent } from "react";
 import { LoadingSpinner } from "./LoadingSpinner";
 import { toast } from "react-toastify";
-import { useGetAllMatchesQuery, useRegisterMatchMutation } from "@/app/state/features/matches/matchesQuery";
+import { useRegisterMatchMutation } from "@/app/state/features/matches/matchesQuery";
 import { useNavigate } from "react-router-dom";
 import type { SerializedError } from "@reduxjs/toolkit";
 
 export const CreateMatches: React.FC = () => {
-  const [addMatch, { isLoading, error }] = useRegisterMatchMutation();
-  const { data: teams, isLoading: loadingTeams } = useGetAllTeamsQuery();
-  const { data: matches, isLoading: loadingMatches } = useGetAllMatchesQuery();
   const navigate = useNavigate();
 
   const [credentials, setCredentials] = useState<object | any>({
@@ -24,7 +21,11 @@ export const CreateMatches: React.FC = () => {
     date: "",
     time: "",
   });
-  const [day, setDay] = useState<Array<number>>([]);
+  const [addMatch, { isLoading, error }] = useRegisterMatchMutation();
+  const { data: teams, isLoading: loadingTeams } = useGetUnfixedTeamsQuery(credentials.matchday, {
+    skip: !credentials.matchday,
+  });
+
   const handleAddMatch = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
@@ -45,14 +46,8 @@ export const CreateMatches: React.FC = () => {
       return toast.error("Failed to add team!");
     }
   };
-  // map through matches, 2. check if any team has a fixed match that's equal to the user input,
-  // const isFixed:boolean =()=> {
-  matches?.data.map((match) =>  (match.matchday === parseInt(credentials.matchday))  
-      // day.push(match.matchday);
-    
-  );
 
-  console.log("day", day);
+  console.log("unfixed teams", teams);
   // }
   return (
     <div className="flex items-cente justify-center ">
@@ -76,7 +71,7 @@ export const CreateMatches: React.FC = () => {
               <div className="grid gap-2">
                 <Label htmlFor="team">Home Team</Label>
                 <select
-                  name="Teams"
+                  name="teams"
                   id="teams"
                   value={credentials.host_team_id}
                   onChange={(e) => setCredentials({ ...credentials, host_team_id: e.target.value })}
@@ -85,7 +80,7 @@ export const CreateMatches: React.FC = () => {
                   <option value="____" className="text-xs"></option>
                   {teams &&
                     !loadingTeams &&
-                    teams.teams.map(
+                    teams.data.map(
                       (team) =>
                         Number(credentials.visitor_team_id) !== Number(team.id) && (
                           <option key={team.id} value={team.id}>
@@ -99,7 +94,7 @@ export const CreateMatches: React.FC = () => {
               <div className="grid gap-2">
                 <Label htmlFor="team">Away Team</Label>
                 <select
-                  name="Teams"
+                  name="teams"
                   id="teams"
                   value={credentials.visitor_team_id}
                   onChange={(e) => setCredentials({ ...credentials, visitor_team_id: e.target.value })}
@@ -108,7 +103,7 @@ export const CreateMatches: React.FC = () => {
                   <option value="____" className="text-xs"></option>
                   {teams &&
                     !loadingTeams &&
-                    teams.teams.map(
+                    teams.data.map(
                       (team) =>
                         Number(credentials.host_team_id) !== Number(team.id) && (
                           <option key={team.id} value={team.id}>

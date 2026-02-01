@@ -23,7 +23,10 @@ class AddMatchRequest extends FormRequest
             "time"=>["nullable", "date_format:H:i"],
             "venue"=>["required", "string", "min:3", "max:100"],
             "is_played"=>["nullable", "boolean"],
-            "matchday"=>["integer","min:1", "max:50"]
+            "matchday"=>["integer","min:1", "max:50"],
+            "host_score"=>["nullable", "integer"],
+            "visitor_score"=>["nullable", "integer"],
+            "status"=>["nullable", "string"]
         ];
     }
     public function messages(){

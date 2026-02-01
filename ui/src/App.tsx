@@ -19,6 +19,8 @@ import { CreateMatches } from "./app/pages/admin/CreateMatches";
 import { AddNewsPost } from "./app/pages/admin/AddNewsPost";
 import { Results } from "./app/pages/results/Results";
 import { Login } from "./app/pages/admin/Login";
+import { AllMatches } from "./app/pages/admin/AllMatches";
+import { EditMatch } from "./app/pages/admin/EditMatch";
 export const App: React.FC = () => {
   return (
     <div className="flex flex-col min-h-screen bg-gray-200">
@@ -28,6 +30,7 @@ export const App: React.FC = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="about" element={<About />} />
+            {/* admin dashboard */}
             <Route path="admin-dashboard" element={<Authenticated />}>
               <Route path="profile" element={<Profile />} />
               <Route path="add-team" element={<AddTeam />} />
@@ -35,7 +38,10 @@ export const App: React.FC = () => {
               <Route path="update-match-results" element={<UpdateMatchResults />} />
               <Route path="create-matches" element={<CreateMatches />} />
               <Route path="news" element={<AddNewsPost />} />
+              <Route path="all-matches" element={<AllMatches />} />
+              <Route path="all-matches/:match" element={<EditMatch />} />
             </Route>
+
             <Route path="table-standings" element={<TableStandings />} />
             <Route path="dinner" element={<Dinner />} />
             <Route path="gallery" element={<Gallery />} />

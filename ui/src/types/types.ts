@@ -40,8 +40,9 @@ type Teams = {
 };
 export type FetchTeam = {
   message: string;
-  teams: Teams[];
+  data: Teams[];
 };
+
 type Match = {
   created_at: Date;
   date: String;
@@ -53,6 +54,11 @@ type Match = {
   venue: string;
   visitor_team_id: number;
   matchday: number;
+  host_score: number;
+  visitor_score: number;
+  host: Teams;
+  visitor: Teams;
+  status: string;
 };
 
 export type AddMatch = {

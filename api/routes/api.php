@@ -22,6 +22,7 @@ Route::controller(AdminController::class)->group(function(){
 Route::controller(TeamController::class)->group(function(){
     Route::post("/rcl/teams/registration", "store")->middleware("auth:admin");
     Route::get("/rcl/teams", "index");
+    Route::get("/rcl/teams/unfixed/{matchday}", "unfixed");
     Route::get("/rcl/teams/{team}", "show");
     Route::put("/rcl/teams/{team}", "update")->middleware("auth:admin");
     Route::delete("/rcl/teams/{team}", "destroy")->middleware("auth:admin");
@@ -31,9 +32,9 @@ Route::controller(TeamController::class)->group(function(){
 Route::controller(MatchController::class)->group(function(){
     Route::post("/rcl/matches/registration", "store")->middleware("auth:admin");
     Route::get("/rcl/matches", "index");
-    Route::get("/rcl/matches/{match}", "show");
-    Route::put("/rcl/matches/{match}", "update")->middleware("auth:admin");
-    Route::delete("/rcl/matches/{match}", "destroy")->middleware("auth:admin");
+    Route::get("/rcl/matches/{event}", "show");
+    Route::put("/rcl/matches/{event}", "update")->middleware("auth:admin");
+    Route::delete("/rcl/matches/{event}", "destroy")->middleware("auth:admin");
 });
 
 // results routes

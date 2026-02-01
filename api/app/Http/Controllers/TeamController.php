@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AddTeamRequest;
 use App\Models\Team;
+use App\Services\MatchService;
 use Illuminate\Http\Request;
 
 class TeamController extends Controller
@@ -24,6 +25,11 @@ class TeamController extends Controller
         return response()->json(["message"=>"Team added", "team"=>$team], 201);
     }
 
+// get free teams
+    public function unfixed(MatchService $unfixed, int $matchday){
+        $teams = $unfixed->getAvailableTeams($matchday);
+        return response()->json(["message"=>"free teams", "data"=>$teams, "matchday"=>$matchday],200);
+    }
     /**
      * Display the specified resource.
      */

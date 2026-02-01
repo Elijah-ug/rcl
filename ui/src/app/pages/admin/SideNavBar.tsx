@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { User, Users, Calendar, UserPlus, Trophy, Menu, Newspaper, List } from "lucide-react";
+import { User, Users, Calendar, UserPlus, Menu, Newspaper, List } from "lucide-react";
 
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
@@ -14,7 +14,7 @@ export const SideNavBar: React.FC = () => {
     { label: "Add Match", to: "create-matches", icon: Calendar },
     { label: "Register Player", to: "register-players", icon: UserPlus },
     { label: "Post News", to: "news", icon: Newspaper },
-    { label: "Match Results", to: "match-results", icon: Trophy },
+    // { label: "Match Results", to: "match-results", icon: Trophy },
   ];
 
   const navItemsupdates = [
@@ -22,7 +22,7 @@ export const SideNavBar: React.FC = () => {
     { label: "Matches", to: "all-matches", icon: List },
     { label: "Players", to: "all-players", icon: List },
     { label: "News", to: "all-news", icon: List },
-    { label: "Results", to: "update-match-results", icon: List },
+    // { label: "Results", to: "update-match-results", icon: List },
   ];
 
   const NavContent = ({ onClick }: { onClick?: () => void }) => (
