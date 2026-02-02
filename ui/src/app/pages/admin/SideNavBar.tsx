@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { User, Users, Calendar, UserPlus, Menu, Newspaper, List } from "lucide-react";
+import { User, Users, Calendar, UserPlus, Menu, Newspaper, List, Table, Table2 } from "lucide-react";
 
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
@@ -14,7 +14,8 @@ export const SideNavBar: React.FC = () => {
     { label: "Add Match", to: "create-matches", icon: Calendar },
     { label: "Register Player", to: "register-players", icon: UserPlus },
     { label: "Post News", to: "news", icon: Newspaper },
-    // { label: "Match Results", to: "match-results", icon: Trophy },
+    { label: "Table", to: "table", icon: Table },
+    { label: "Publish Table", to: "publish-table", icon: Table2 },
   ];
 
   const navItemsupdates = [
@@ -100,6 +101,8 @@ export const SideNavBar: React.FC = () => {
           <SheetContent side="left" className="w-64">
             <h2 className="mb-4 text-lg font-bold">Admin Dashboard</h2>
             <NavContent />
+            <h3 className="text-lg font-semibold py-3">Update Controlls</h3>
+            <NavContentUpdates />
           </SheetContent>
         </Sheet>
       </div>

@@ -50,7 +50,7 @@ export const AddPlayer: React.FC = () => {
                   <option value="___">Select Team</option>
                   {teams &&
                     !loadingTeams &&
-                    teams.data.map(
+                    teams.teams.map(
                       (team) =>
                         Number(credentials.host_team_id) !== Number(team.id) && (
                           <option key={team.id} value={team.id}>

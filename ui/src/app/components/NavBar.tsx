@@ -10,6 +10,7 @@ export const NavBar: React.FC = () => {
   const routes = [
     { name: "Home", link: "/" },
     { name: "About", link: "about" },
+    { name: "Matches", link: "matches" },
     { name: "Table Standings", link: "table-standings" },
     { name: "Dinner", link: "dinner" },
     { name: "Gallery", link: "gallery" },

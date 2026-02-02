@@ -6,7 +6,7 @@ import { GlobalSpinner } from "../global/GlobalSpinner";
 
 export const Authenticated: React.FC = () => {
   const { data, isLoading } = useGetAdminQuery();
-// console.log("Logged in admin==>", data)
+  // console.log("Logged in admin==>", data)
   return (
     <div className="">
       <div className="">{isLoading ? <GlobalSpinner /> : data ? <AdminDashboard /> : <Login />}</div>

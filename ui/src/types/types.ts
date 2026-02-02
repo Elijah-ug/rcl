@@ -40,7 +40,7 @@ type Teams = {
 };
 export type FetchTeam = {
   message: string;
-  data: Teams[];
+  teams: Teams[];
 };
 
 type Match = {
@@ -92,4 +92,23 @@ export type AddNewsResponse = {
 };
 export type FetchNews = {
   data: Data[];
+};
+
+export type PublishTable = {
+  Club: string;
+  MP: string;
+  W: string;
+  D: string;
+  L: string;
+  GF: string;
+  GA: string;
+  GD: string;
+  Pts: string;
+  Last_5: string;
+};
+export type TableRequest = {
+  data: PublishTable[];
+  created_at: Date;
+  updated_at: Date;
+  message: string;
 };

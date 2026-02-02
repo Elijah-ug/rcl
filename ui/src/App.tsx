@@ -17,10 +17,12 @@ import { AddPlayer } from "./app/pages/admin/AddPlayer";
 import { UpdateMatchResults } from "./app/pages/admin/UpdateMatchResults";
 import { CreateMatches } from "./app/pages/admin/CreateMatches";
 import { AddNewsPost } from "./app/pages/admin/AddNewsPost";
-import { Results } from "./app/pages/results/Results";
+import { Matches } from "./app/pages/matches/Matches";
 import { Login } from "./app/pages/admin/Login";
 import { AllMatches } from "./app/pages/admin/AllMatches";
 import { EditMatch } from "./app/pages/admin/EditMatch";
+import { PublishTable } from "./app/pages/admin/PublishTable";
+import { Table } from "./app/pages/admin/Table";
 export const App: React.FC = () => {
   return (
     <div className="flex flex-col min-h-screen bg-gray-200">
@@ -40,12 +42,14 @@ export const App: React.FC = () => {
               <Route path="news" element={<AddNewsPost />} />
               <Route path="all-matches" element={<AllMatches />} />
               <Route path="all-matches/:match" element={<EditMatch />} />
+              <Route path="publish-table" element={<PublishTable />} />
+              <Route path="table" element={<Table />} />
             </Route>
 
             <Route path="table-standings" element={<TableStandings />} />
             <Route path="dinner" element={<Dinner />} />
             <Route path="gallery" element={<Gallery />} />
-            <Route path="results" element={<Results />} />
+            <Route path="matches" element={<Matches />} />
 
             {/* off pages */}
             <Route path="signup" element={<SignUp />} />

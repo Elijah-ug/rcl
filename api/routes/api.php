@@ -5,6 +5,7 @@ use App\Http\Controllers\MatchController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\ResultController;
+use App\Http\Controllers\TableController;
 use App\Http\Controllers\TeamController;
 use Illuminate\Support\Facades\Route;
 
@@ -62,5 +63,14 @@ Route::controller( NewsController::class)->group(function(){
     Route::get("/rcl/news/{news}", "show");
     Route::put("/rcl/news/update/{news}", "update")->middleware("auth:admin");
     Route::delete("/rcl/news/{news}", "destroy")->middleware("auth:admin");
+});
+
+// table routes
+Route::controller( TableController::class)->group(function(){
+     Route::post("/rcl/table/publish", "store")->middleware("auth:admin");
+    Route::get("/rcl/table", "index");
+    Route::get("/rcl/table/{table}", "show");
+    Route::put("/rcl/table/update/{table}", "update")->middleware("auth:admin");
+    Route::post("/rcl/table/reset", "reset")->middleware("auth:admin");
 });
 

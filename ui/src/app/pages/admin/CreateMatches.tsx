@@ -80,7 +80,7 @@ export const CreateMatches: React.FC = () => {
                   <option value="____" className="text-xs"></option>
                   {teams &&
                     !loadingTeams &&
-                    teams.data.map(
+                    teams.teams.map(
                       (team) =>
                         Number(credentials.visitor_team_id) !== Number(team.id) && (
                           <option key={team.id} value={team.id}>
@@ -103,7 +103,7 @@ export const CreateMatches: React.FC = () => {
                   <option value="____" className="text-xs"></option>
                   {teams &&
                     !loadingTeams &&
-                    teams.data.map(
+                    teams.teams.map(
                       (team) =>
                         Number(credentials.host_team_id) !== Number(team.id) && (
                           <option key={team.id} value={team.id}>

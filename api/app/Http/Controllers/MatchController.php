@@ -14,7 +14,13 @@ class MatchController extends Controller
      * Display a listing of the resource.
      */
     public function index(){
-        $matches = Event::with(["host", "visitor"])->orderBy("date", "asc")->get();
+        $matches = Event::with(["host", "visitor"])->orderByRaw("CASE status
+        WHEN 'FT' THEN 1
+        WHEN 'HT' THEN 2
+        WHEN 'upcoming' THEN 3
+        WHEN 'postponed' THEN 4
+        END
+        ")->get();
         return response()->json(["message"=>"matches fetched", "data"=>$matches]);
     }
 

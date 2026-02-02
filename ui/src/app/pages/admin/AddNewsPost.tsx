@@ -31,7 +31,7 @@ export const AddNewsPost: React.FC = () => {
   };
   return (
     <div className="flex items-cente justify-center ">
-      <Card className="w-full max-w-sm">
+      <Card className="w-full max-w-xs sm:max-w-lg">
         <CardHeader>
           <CardTitle>Add Team</CardTitle>
         </CardHeader>
